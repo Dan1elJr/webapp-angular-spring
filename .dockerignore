@@ -1,0 +1,9 @@
+.git
+.angular
+public
+
+todo/node_modules
+todo/dist
+todo/.angular
+todo/out-tsc
+todo/npm-debug.log
