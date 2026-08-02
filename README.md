@@ -1,4 +1,4 @@
 # webapp-angular-spring
 
-Frontend - Angular.
-Backend - Java/Springboot.s
+Frontend - Angular
+Backend - Java/Springboot
