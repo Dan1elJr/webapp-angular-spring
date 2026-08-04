@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component , OnInit,signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HardCodedAuthentication } from '../service/hard-coded-authentication';
 import { NgIf } from '@angular/common';
@@ -9,16 +9,8 @@ import { NgIf } from '@angular/common';
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
-export class Menu implements OnInit {
-
-    public isUserLogged: boolean = false;
+export class Menu {
 
     constructor(public hardcodedAuthenticationService: HardCodedAuthentication) { 
     } 
-
-    ngOnInit(): void {
-        this.isUserLogged = this.hardcodedAuthenticationService.isUserLoggedIn();
-    }
-
-
 }
