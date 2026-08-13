@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Service, inject } from '@angular/core';
 
+export class HelloWorldBean{
+    constructor(public message: string) {}
+}
+
 @Service()
 export class WelcomeData {
 
@@ -8,7 +12,7 @@ export class WelcomeData {
 
     executeHelloWorldService() {
         console.log("Execute HelloWorld Bean Service");
-        return this.http.get("http://localhost:8080/api/hello-world");
+        return this.http.get<HelloWorldBean>("http://localhost:8080/api/hello-world");
     }
 
 }
