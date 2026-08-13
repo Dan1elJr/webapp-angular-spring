@@ -1,5 +1,7 @@
 package com.sandaniel.rest.webservices.controller;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +25,10 @@ public class HelloWorldController {
 	
 	@GetMapping("/hello-world")
 	public HelloWorldBean sayHello( ) {
-		
-		helloService.setMessage("Hello World");
-		
-		return helloService;
+		throw new RuntimeException("Some error hapenned, contact support");
+//		helloService.setMessage("Hello World");
+//		
+//		return helloService;
 	}
 	
 	@GetMapping("/hello/path-variable/{name}")

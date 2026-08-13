@@ -25,7 +25,8 @@ export class Welcome {
 
   getWelcomeMessage() {
     this.welcomeData.executeHelloWorldService().subscribe(
-      response => this.handleSucessfulResponse(response)
+      response => this.handleSucessfulResponse(response),
+      error => this.handleErrorResponse(error)
     );
 
     console.log("Last line of getWelcomeMessage");
@@ -36,5 +37,11 @@ export class Welcome {
     this.changeDetectorRef.detectChanges();
     // console.log(response);
      console.log(this.welcomeMessageFromService);
+  }
+
+  handleErrorResponse(error: any) {
+    console.log(error.error.message);
+    this.welcomeMessageFromService = error.error.message;
+    this.changeDetectorRef.detectChanges();
   }
 }
