@@ -15,4 +15,9 @@ export class WelcomeData {
         return this.http.get<HelloWorldBean>("http://localhost:8080/api/hello-world");
     }
 
+    executeHelloWorldServiceWhithPathVariable(name: string) {
+        console.log("Execute HelloWorld Bean Service");
+        return this.http.get<HelloWorldBean>(`http://localhost:8080/api/hello-world/${name}`);
+    }
+
 }

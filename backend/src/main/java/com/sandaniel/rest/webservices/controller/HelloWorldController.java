@@ -25,13 +25,12 @@ public class HelloWorldController {
 	
 	@GetMapping("/hello-world")
 	public HelloWorldBean sayHello( ) {
-		throw new RuntimeException("Some error hapenned, contact support");
-//		helloService.setMessage("Hello World");
-//		
-//		return helloService;
+		helloService.setMessage("Hello World");
+		
+		return helloService;
 	}
 	
-	@GetMapping("/hello/path-variable/{name}")
+	@GetMapping("/hello-world/{name}")
 	public HelloWorldBean sayHello(@PathVariable String name ) {
 		
 		helloService.setMessage("My name is " + name);

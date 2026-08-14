@@ -23,8 +23,8 @@ export class Welcome {
     this.name = this.route.snapshot.params['name'];
   }
 
-  getWelcomeMessage() {
-    this.welcomeData.executeHelloWorldService().subscribe(
+  getWelcomeMessageWithParameters() {
+    this.welcomeData.executeHelloWorldServiceWhithPathVariable(this.name).subscribe(
       response => this.handleSucessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
