@@ -9,15 +9,16 @@ export class HelloWorldBean{
 export class WelcomeData {
 
     private http = inject(HttpClient);
+    private readonly apiBaseUrl = `http://${window.location.hostname}:8080/api`;
 
     executeHelloWorldService() {
         console.log("Execute HelloWorld Bean Service");
-        return this.http.get<HelloWorldBean>("http://localhost:8080/api/hello-world");
+        return this.http.get<HelloWorldBean>(`${this.apiBaseUrl}/hello-world`);
     }
 
     executeHelloWorldServiceWhithPathVariable(name: string) {
         console.log("Execute HelloWorld Bean Service");
-        return this.http.get<HelloWorldBean>(`http://localhost:8080/api/hello-world/${name}`);
+        return this.http.get<HelloWorldBean>(`${this.apiBaseUrl}/hello-world/${name}`);
     }
 
 }

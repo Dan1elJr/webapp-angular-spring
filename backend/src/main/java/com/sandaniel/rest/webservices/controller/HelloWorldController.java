@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sandaniel.rest.webservices.entity.HelloWorldBean;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","http://192.168.1.3:4200"})
 @RestController
 @RequestMapping("/api")
 public class HelloWorldController {
