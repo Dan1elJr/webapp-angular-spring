@@ -1,4 +1,4 @@
-package com.sandaniel.rest.webservices.utils;
+package com.sandaniel.rest.webservices.entity;
 
 import org.springframework.stereotype.Service;
 

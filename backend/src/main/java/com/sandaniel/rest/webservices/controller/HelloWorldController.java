@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sandaniel.rest.webservices.utils.HelloWorldBean;
+import com.sandaniel.rest.webservices.entity.HelloWorldBean;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
