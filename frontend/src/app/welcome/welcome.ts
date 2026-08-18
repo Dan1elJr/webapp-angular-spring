@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { WelcomeData } from '../service/data/welcome-data';
-import { ChangeDetectorRef } from '@angular/core';
+import { signal } from '@angular/core';
 @Component({
   selector: 'app-welcome',
   imports: [RouterLink,NgIf],
@@ -11,10 +11,10 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class Welcome {
   message : string = "some welcome message";
-  welcomeMessageFromService: string ="";
+  welcomeMessageFromService = signal<string>('');
   name : string = '';
 
-  constructor(private route: ActivatedRoute, private welcomeData: WelcomeData, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute, private welcomeData: WelcomeData) {
     
   }
 
@@ -33,8 +33,7 @@ export class Welcome {
   }
 
   handleSucessfulResponse(response: any) {
-    this.welcomeMessageFromService = response.message;
-    this.changeDetectorRef.detectChanges();
+    this.welcomeMessageFromService.set(response.message);
     // console.log(response);
      console.log(this.welcomeMessageFromService);
   }
@@ -42,6 +41,5 @@ export class Welcome {
   handleErrorResponse(error: any) {
     console.log(error.error.message);
     this.welcomeMessageFromService = error.error.message;
-    this.changeDetectorRef.detectChanges();
   }
 }

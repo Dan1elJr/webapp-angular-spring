@@ -1,5 +1,8 @@
 import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { TodoData } from '../service/data/todo-data';
+
+
 
 export class Todo {
     constructor(public id: number, public description: string, public done: boolean, public targetDate: Date) {
@@ -16,15 +19,20 @@ export class Todo {
 })
 export class ListTodos {
 
-  todos = [
-    new Todo(1, 'Learn to Dance', false, new Date()),
-    new Todo(2, 'Become an Expert at Angular', false, new Date()),
-    new Todo(3, 'Visit India', false, new Date())
-  ];
+  todos = signal<Todo[]>([]);
 
-  // todo = {
-  //   id :1,
-  //   description : 'Learn to Dance',
-  // }
+
+  constructor(private  service: TodoData) {}
+
+  ngOnInit() {
+   this.service.retrieveAllTodos('sandaniel').subscribe(
+    response => {
+      console.log(response);
+      this.todos.set(response);
+      
+    },
+
+    );
+  }
 
 }

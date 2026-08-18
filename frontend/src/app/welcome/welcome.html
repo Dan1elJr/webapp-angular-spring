@@ -9,7 +9,7 @@
     <button  (click)="getWelcomeMessageWithParameters()" class="btn btn-success">Get Welcome Message</button>
 </div>
 
-<div class="container" *ngIf="welcomeMessageFromService"> 
+<div class="container" *ngIf="welcomeMessageFromService()"> 
     <h2>Your customized welcome message:</h2>
-    <p>{{welcomeMessageFromService}}</p>
+    <p>{{welcomeMessageFromService()}}</p>
 </div>
