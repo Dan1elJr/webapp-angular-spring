@@ -20,4 +20,8 @@ export class TodoData {
         return this.http.delete(`${this.apiBaseUrl}/users/${username}/todos/${id}`);
     }
 
+    retrieveTodo(username: string, id: number) {
+        return this.http.get<Todo>(`${this.apiBaseUrl}/users/${username}/todos/${id}`);
+    }
+
 }

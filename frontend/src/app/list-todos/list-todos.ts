@@ -1,4 +1,4 @@
-import { DatePipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
+import { DatePipe, NgFor, UpperCasePipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { TodoData } from '../service/data/todo-data';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ export class Todo {
 
 @Component({
   selector: 'app-list-todos',
-  imports: [NgIf, NgFor, UpperCasePipe, DatePipe],
+  imports: [NgFor, UpperCasePipe, DatePipe],
   templateUrl: './list-todos.html',
   styleUrl: './list-todos.css',
 })
