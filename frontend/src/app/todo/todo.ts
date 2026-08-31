@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { TodoData } from '../service/data/todo-data';
 import { ActivatedRoute } from '@angular/router';
 import { Todo as TodoModel } from '../list-todos/list-todos';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo',
-  imports: [FormsModule],
+  imports: [FormsModule,DatePipe],
   templateUrl: './todo.html',
   styleUrl: './todo.css',
 })
@@ -22,6 +23,7 @@ export class Todo {
   ngOnInit() {
     
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.todo.set(new TodoModel(1,'',false,new Date() ));
     this.todoService.retrieveTodo('sandaniel', this.id).subscribe(
       response => {
         this.todo.set(response);
