@@ -9,19 +9,19 @@ public  class Todo {
 	private String username;
 	private String description;
 	private Date targetDate;
-	private boolean isDone;
+	private boolean done;
 	
 	public Todo () {
 		
 	}
 	
-	public Todo(long id, String username, String description, Date targetDate, boolean isDone) {
+	public Todo(long id, String username, String description, Date targetDate, boolean done) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.description = description;
 		this.targetDate = targetDate;
-		this.isDone = isDone;
+		this.done = done;
 	}
 
 	public long getId() {
@@ -57,17 +57,17 @@ public  class Todo {
 	}
 
 	public boolean isDone() {
-		return isDone;
+		return done;
 	}
 
 	public void setDone(boolean isDone) {
-		this.isDone = isDone;
+		this.done = isDone;
 	}
 
 	@Override
 	public String toString() {
 		return "Todo [id=" + id + ", username=" + username + ", description=" + description + ", targetDate="
-				+ targetDate + ", isDone=" + isDone + "]";
+				+ targetDate + ", isDone=" + done + "]";
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import com.sandaniel.rest.webservices.entity.Todo;
 public class TodoHardCodedService {
 	
 	private static List<Todo> todos = new ArrayList<>();
-	private static int idCounter = 0;
+	private static int idCounter=0;
 	
 	static {
 		todos.add(new Todo(++idCounter,"sandaniel","Learn to play", new Date(), false));
@@ -26,7 +26,7 @@ public class TodoHardCodedService {
 	
 	public Todo save (Todo todo) {
 		
-		if (todo.getId() == -1) {
+		if (todo.getId() == -1 || todo.getId() == 0) {
 			todo.setId(++idCounter);
 			todos.add(todo);
 		} else {
@@ -36,6 +36,8 @@ public class TodoHardCodedService {
 		
 		return todo;
 	}
+    
+    
 	
 	public Todo deleteById(long id) {
 		
