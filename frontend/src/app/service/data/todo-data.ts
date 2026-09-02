@@ -29,4 +29,9 @@ export class TodoData {
         put(`${this.apiBaseUrl}/users/${username}/todos/${id}`, todo);
     }
 
+    createTodo(username: string, todo: Todo){
+        return this.http.
+        post(`${this.apiBaseUrl}/users/${username}/todos`, todo);
+    }   
+
 }

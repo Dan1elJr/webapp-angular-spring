@@ -23,23 +23,36 @@ export class Todo {
   ngOnInit() {
     
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.todo.set(new TodoModel(1,'',false,new Date() ));
-    this.todoService.retrieveTodo('sandaniel', this.id).subscribe(
-      response => {
-        this.todo.set(response);
-        
-      }
-    );
+    this.todo.set(new TodoModel(this.id,'',false,new Date() ));
+
+    if(this.id != -1){
+      this.todoService.retrieveTodo('sandaniel', this.id).subscribe(
+        response => {
+          this.todo.set(response);
+          
+        }
+      );
+    }  
   }  
 
 
   saveTodo(): void {
-    this.todoService.updateTodo('sandaniel', this.id, this.todo()!).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['todos']);
-      }
-    );
+    if(this.id == -1){
+      this.todoService.createTodo('sandaniel', this.todo()!).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['todos']);
+        }
+      );
+    }
+    else{ 
+        this.todoService.updateTodo('sandaniel', this.id, this.todo()!).subscribe(
+          response => {
+            console.log(response);
+            this.router.navigate(['todos']);
+          }
+        );
+    }  
   }
 
 

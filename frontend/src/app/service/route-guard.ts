@@ -1,10 +1,12 @@
-import { Service, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { HardCodedAuthentication } from './hard-coded-authentication';
 
 
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
 export class RouteGuard implements CanActivate {
 
     private hardCodedAuthentication = inject(HardCodedAuthentication);

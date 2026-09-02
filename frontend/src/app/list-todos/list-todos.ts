@@ -55,4 +55,8 @@ export class ListTodos {
     )
   }   
 
+  addTodo(){
+        this.router.navigate(['todos', -1]);
+  }
+
 }
