@@ -24,4 +24,9 @@ export class TodoData {
         return this.http.get<Todo>(`${this.apiBaseUrl}/users/${username}/todos/${id}`);
     }
 
+    updateTodo(username: string, id: number, todo: Todo){
+        return this.http.
+        put(`${this.apiBaseUrl}/users/${username}/todos/${id}`, todo);
+    }
+
 }

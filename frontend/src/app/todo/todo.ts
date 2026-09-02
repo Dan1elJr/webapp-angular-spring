@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TodoData } from '../service/data/todo-data';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Todo as TodoModel } from '../list-todos/list-todos';
 import { DatePipe } from '@angular/common';
 
@@ -16,7 +16,7 @@ export class Todo {
   id: number=0;
   todo = signal<TodoModel | null>(null);
 
-  constructor(private todoService: TodoData, private activatedRoute: ActivatedRoute ) {
+  constructor(private todoService: TodoData, private activatedRoute: ActivatedRoute , private router: Router) {
     
   }  
 
@@ -31,6 +31,17 @@ export class Todo {
       }
     );
   }  
+
+
+  saveTodo(): void {
+    this.todoService.updateTodo('sandaniel', this.id, this.todo()!).subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['todos']);
+      }
+    );
+  }
+
 
   
 
