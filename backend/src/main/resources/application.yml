@@ -1,6 +1,12 @@
 spring:
   application:
     name: orders-service
+    
+  security:
+    user:
+        name: sandaniel
+        password: sandaniel
+        
   datasource:
     url: jdbc:postgresql://localhost:5432/webservice
     username: postgres
