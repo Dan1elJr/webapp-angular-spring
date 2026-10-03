@@ -22,7 +22,7 @@ public class BasicAuthenticationController {
 	
 	@GetMapping("/basicauth")
 	public AuthenticationBean sayHello( ) {
-		authenticationService.setMessage("Hello World");
+		authenticationService.setMessage("You are authenticated");
 		
 		return authenticationService;
 	}
