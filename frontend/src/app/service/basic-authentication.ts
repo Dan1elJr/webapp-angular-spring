@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class BasicAuthenticationService {
     constructor(private http: HttpClient) {}
 
 
-    executeAuthenticationService(name: string, password: string) {
+    executeAuthenticationService(username: string, password: string) {
 
         let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
 
@@ -21,7 +22,16 @@ export class BasicAuthenticationService {
         });
 
         console.log("Execute Basic Authentication Service");
-        return this.http.get<AuthenticationBean>(`${this.apiBaseUrl}/basicauth}`, { headers });
+        return this.http.get<AuthenticationBean>(`${this.apiBaseUrl}/basicauth}`, { headers }
+            
+        ).pipe(
+            map(
+                data =>{
+                    sessionStorage.setItem('authenticatedUser', username);
+                    return data;
+                }
+            )
+        );
     }
 
 
