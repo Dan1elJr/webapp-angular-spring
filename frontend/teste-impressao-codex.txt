@@ -1,3 +1,0 @@
-Teste de impressao enviado pelo Codex.
-Impressora: HP DeskJet 2900 series
-Porta mapeada: USB004
