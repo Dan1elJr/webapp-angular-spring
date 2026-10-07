@@ -1,59 +1,155 @@
-# Todo
+# Todo Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.4.
+Aplicacao frontend em Angular para gerenciamento de tarefas. O app possui login, rotas protegidas, tela de boas-vindas e fluxo de listagem, criacao, edicao e exclusao de todos consumindo uma API REST.
 
-## Development server
+## Tecnologias
 
-To start a local development server, run:
+- Angular 22
+- TypeScript 6
+- RxJS
+- Bootstrap 4
+- Vitest
+- npm
 
-```bash
-ng serve
-```
+## Funcionalidades
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Login com Basic Authentication
+- Protecao de rotas com `RouteGuard`
+- Listagem de tarefas
+- Cadastro de nova tarefa
+- Edicao de tarefa existente
+- Exclusao de tarefa
+- Tela de logout
+- Consumo de backend REST em `http://<host>:8080/api`
 
-## Code scaffolding
+## Pre-requisitos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js compativel com a versao definida em `.node-version`
+- npm
+- Angular CLI, se quiser usar o comando `ng` diretamente
+- Backend da aplicacao rodando na porta `8080`
 
-```bash
-ng generate component component-name
-```
+## Instalacao
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Instale as dependencias:
 
 ```bash
-ng test
+npm install
 ```
 
-## Running end-to-end tests
+## Executando em desenvolvimento
 
-For end-to-end (e2e) testing, run:
+Inicie o servidor local:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+O script executa:
 
-## Additional Resources
+```bash
+ng serve --host 0.0.0.0
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+A aplicacao ficara disponivel em:
+
+```text
+http://localhost:4200
+```
+
+## Backend esperado
+
+O frontend espera encontrar a API em:
+
+```text
+http://<hostname>:8080/api
+```
+
+Principais endpoints consumidos:
+
+```text
+GET    /api/basicauth
+GET    /api/users/{username}/todos
+GET    /api/users/{username}/todos/{id}
+POST   /api/users/{username}/todos
+PUT    /api/users/{username}/todos/{id}
+DELETE /api/users/{username}/todos/{id}
+```
+
+Durante o desenvolvimento atual, alguns fluxos usam o usuario `sandaniel` como valor fixo nos servicos de todos.
+
+## Rotas da aplicacao
+
+| Rota | Descricao | Protegida |
+| --- | --- | --- |
+| `/` | Login | Nao |
+| `/login` | Login | Nao |
+| `/welcome/:name` | Boas-vindas do usuario | Sim |
+| `/todos` | Lista de tarefas | Sim |
+| `/todos/:id` | Criacao ou edicao de tarefa | Sim |
+| `/logout` | Logout | Sim |
+| `/**` | Pagina de erro | Nao |
+
+## Scripts disponiveis
+
+```bash
+npm start
+```
+
+Executa a aplicacao em modo desenvolvimento.
+
+```bash
+npm run build
+```
+
+Gera a versao de producao em `dist/`.
+
+```bash
+npm run watch
+```
+
+Executa o build em modo observacao para desenvolvimento.
+
+```bash
+npm test
+```
+
+Executa os testes unitarios.
+
+## Build de producao
+
+Para gerar os arquivos finais:
+
+```bash
+npm run build
+```
+
+Os artefatos serao criados no diretorio:
+
+```text
+dist/
+```
+
+O projeto tambem possui um `nginx.conf.template`, que pode ser usado como base para servir a aplicacao em ambiente de container ou servidor web.
+
+## Estrutura principal
+
+```text
+src/
+  app/
+    login/          Tela de login
+    welcome/        Tela de boas-vindas
+    list-todos/     Lista de tarefas
+    todo/           Criacao e edicao de tarefas
+    logout/         Tela de logout
+    error/          Tela de erro
+    menu/           Menu da aplicacao
+    footer/         Rodape
+    service/        Guards, autenticacao, interceptadores e servicos HTTP
+```
+
+## Observacoes
+
+- O token Basic Auth e o usuario autenticado sao armazenados em `sessionStorage`.
+- A API precisa permitir CORS para a origem do frontend.
+- O interceptor de Basic Auth existe no projeto, mas atualmente esta comentado em `app.config.ts`.
