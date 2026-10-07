@@ -12,11 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfigurationBasicAuth  {
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 				return
 						http
+						.cors(Customizer.withDefaults())
 						.authorizeHttpRequests(
 								auth ->
 									auth.requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
@@ -25,7 +26,8 @@ public class SpringSecurityConfigurationBasicAuth  {
 						.httpBasic(Customizer.withDefaults())
 						.sessionManagement(
 						session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).csrf(csrf -> csrf.disable()).build();
-						
-				
+
+
 	}
+	
 }

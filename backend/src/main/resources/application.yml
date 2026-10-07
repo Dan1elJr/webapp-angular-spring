@@ -5,7 +5,7 @@ spring:
   security:
     user:
         name: sandaniel
-        password: sandaniel
+        password: san
         
   datasource:
     url: jdbc:postgresql://localhost:5432/webservice
@@ -35,4 +35,5 @@ server:
 logging:
   level:
     org.springframework: WARN
-    com.sandaniel: INFO   
+    com.sandaniel: INFO
+ 

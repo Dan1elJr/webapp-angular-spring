@@ -4,17 +4,17 @@ import java.util.Date;
 import java.util.Objects;
 
 public  class Todo {
-	 
+
 	public long id;
 	private String username;
 	private String description;
 	private Date targetDate;
 	private boolean done;
-	
+
 	public Todo () {
-		
+
 	}
-	
+
 	public Todo(long id, String username, String description, Date targetDate, boolean done) {
 		super();
 		this.id = id;
@@ -77,16 +77,16 @@ public  class Todo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Todo other = (Todo) obj;
 		return id == other.id;
 	}
-	
-	
-	
+
+
+
 }

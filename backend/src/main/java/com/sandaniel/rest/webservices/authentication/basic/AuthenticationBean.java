@@ -1,8 +1,14 @@
 package com.sandaniel.rest.webservices.authentication.basic;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class AuthenticationBean {
+
+	private String message="";
 	
-	private String message;
+	public AuthenticationBean() {}
 	
 	public AuthenticationBean(String message) {
 		this.message = message;
@@ -20,6 +26,6 @@ public class AuthenticationBean {
 	public String toString() {
 		return "AuthenticationBean [message=" + message + "]";
 	}
-	
-	
+
+
 }

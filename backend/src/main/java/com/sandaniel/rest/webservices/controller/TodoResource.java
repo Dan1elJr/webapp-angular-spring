@@ -20,14 +20,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sandaniel.rest.webservices.TodoHardCodedService;
 import com.sandaniel.rest.webservices.entity.Todo;
 
-@CrossOrigin(origins = {"http://localhost:4200","http://192.168.1.3:4200"})
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api")
 public class TodoResource {
-	
+
 	private TodoHardCodedService todoService;
-	
-	
+
+
 	@Autowired
 	public TodoResource(TodoHardCodedService todoService) {
 		this.todoService = todoService;
@@ -38,12 +38,12 @@ public class TodoResource {
 	public List<Todo> getAllTodos(@PathVariable String username){
 		return todoService.findAll();
 	}
-	
+
 	@GetMapping("/users/{username}/todos/{id}")
 	public Todo getTodo(@PathVariable String username, @PathVariable long id){
 		return todoService.findById(id);
 	}
-	
+
 	@DeleteMapping("/users/{username}/todos/{id}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id){
 		Todo todo = todoService.deleteById(id);
@@ -52,24 +52,24 @@ public class TodoResource {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@PutMapping("/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo){
-		
+
 		Todo todoUpdated = todoService.save(todo);
-		return new ResponseEntity<Todo>(todoUpdated,HttpStatus.OK);
-		
+		return new ResponseEntity<>(todoUpdated,HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping("/users/{username}/todos")
 	public ResponseEntity<Void>updateTodo(@PathVariable String username, @RequestBody Todo todo){
 		Todo createdTodo = todoService.save(todo);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/id").buildAndExpand(createdTodo.getId()).toUri();
-		
+
 		return ResponseEntity.created(uri).build();
 	}
-	
-	
+
+
 }
