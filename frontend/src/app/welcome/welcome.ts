@@ -32,6 +32,7 @@ export class Welcome {
     console.log("Last line of getWelcomeMessage");
   }
 
+  
   handleSucessfulResponse(response: any) {
     this.welcomeMessageFromService.set(response.message);
     // console.log(response);

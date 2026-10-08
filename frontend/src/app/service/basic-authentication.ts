@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 export class BasicAuthenticationService {
 
     private readonly apiBaseUrl = `http://${window.location.hostname}:8080/api`;
+    private isLoggedIn = signal(this.hasAuthenticatedUser());
 
     constructor(private http: HttpClient) {}
 
@@ -26,37 +27,68 @@ export class BasicAuthenticationService {
         return this.http.get<AuthenticationBean>(`${this.apiBaseUrl}/basicauth`, { headers }
             
         ).pipe(
-            map(
-                data =>{
-                    sessionStorage.setItem('authenticatedUser', username);
-                    sessionStorage.setItem('token', basicAuthHeaderString);
-                    return data;
-                }
-            )
+            tap(() => {
+                this.setAuthenticatedUser(username, basicAuthHeaderString);
+                this.isLoggedIn.set(true);
+            })
         );
     }
 
 
     logout(){
-        sessionStorage.removeItem('authenticatedUser');
-        sessionStorage.removeItem('token');
-        // this.isLoggedIn.set(false);
+        this.removeAuthenticatedUser();
+        this.isLoggedIn.set(false);
     }
 
 
 
     getAuthenticatedToken(): string | null {
-      
+        if (!this.canUseSessionStorage()) {
+            return null;
+        }
+
         return sessionStorage.getItem('token');
      
     }
 
-    isUserLoggedIn(): boolean {
-        let user = sessionStorage.getItem('authenticatedUser');
-        return !(user === null);
+    getAuthenticatedUser(): string | null {
+        if (!this.canUseSessionStorage()) {
+            return null;
+        }
+
+        return sessionStorage.getItem('authenticatedUser');
     }
 
+    isUserLoggedIn(): boolean {
+       return this.isLoggedIn();
+        
+    }
 
+    get loggedIn(): boolean {
+        return this.isUserLoggedIn();
+    }
+
+    private hasAuthenticatedUser(): boolean {
+        return this.getAuthenticatedUser() !== null;
+    }
+
+    private setAuthenticatedUser(username: string, token: string): void {
+        if (this.canUseSessionStorage()) {
+            sessionStorage.setItem('authenticatedUser', username);
+            sessionStorage.setItem('token', token);
+        }
+    }
+
+    private removeAuthenticatedUser(): void {
+        if (this.canUseSessionStorage()) {
+            sessionStorage.removeItem('authenticatedUser');
+            sessionStorage.removeItem('token');
+        }
+    }
+
+    private canUseSessionStorage(): boolean {
+        return typeof sessionStorage !== 'undefined';
+    }
 
 }
 

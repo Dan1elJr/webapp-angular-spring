@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { HardCodedAuthentication } from './hard-coded-authentication';
+import { BasicAuthenticationService } from './basic-authentication';
 
 
 
@@ -9,12 +9,12 @@ import { HardCodedAuthentication } from './hard-coded-authentication';
 })
 export class RouteGuard implements CanActivate {
 
-    private hardCodedAuthentication = inject(HardCodedAuthentication);
+    private basicAuthenticationService = inject(BasicAuthenticationService);
     private router = inject(Router);
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
             
-        if(this.hardCodedAuthentication.loggedIn){
+        if(this.basicAuthenticationService.loggedIn){
             return true;
         }
         this.router.navigate(['login']);

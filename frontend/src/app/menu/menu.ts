@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component , OnInit,signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HardCodedAuthentication } from '../service/hard-coded-authentication';
 import { NgIf } from '@angular/common';
+import { BasicAuthenticationService } from '../service/basic-authentication';
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +11,6 @@ import { NgIf } from '@angular/common';
 })
 export class Menu {
 
-    constructor(public hardcodedAuthenticationService: HardCodedAuthentication) { 
+    constructor(public basicAuthenticationService: BasicAuthenticationService) { 
     } 
 }

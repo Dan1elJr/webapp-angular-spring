@@ -17,13 +17,9 @@ export class WelcomeData {
     }
 
     executeHelloWorldServiceWhithPathVariable(name: string) {
-        let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-        let headers = new HttpHeaders({
-            Authorization: basicAuthHeaderString
-        });
 
         console.log("Execute HelloWorld Bean Service");
-        return this.http.get<HelloWorldBean>(`${this.apiBaseUrl}/hello-world/${name}`, { headers });
+        return this.http.get<HelloWorldBean>(`${this.apiBaseUrl}/hello-world/${name}`);
     }
 
     createBasicAuthenticationHttpHeader() {

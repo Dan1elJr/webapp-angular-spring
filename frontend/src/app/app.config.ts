@@ -15,6 +15,6 @@ export const appConfig: ApplicationConfig = {
     , provideRouter(routes)
     , provideBrowserGlobalErrorListeners()
     , provideHttpClient(withInterceptorsFromDi())
-    // , {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuth, multi: true}
+    , {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuth, multi: true}
   ]
 };
